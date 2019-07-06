@@ -35,7 +35,6 @@ const Button = props => (
     width={[1 / 4]}
     mr={2}
     my={1}
-    {...props}
     css={{
       cursor: 'pointer',
       '&:hover': {
@@ -43,6 +42,7 @@ const Button = props => (
         opacity: 0.8,
       },
     }}
+    {...props}
   />
 )
 
@@ -67,12 +67,12 @@ const MessageSquare = styled(BaseMessageSquare)({
 const Caps = props => (
   <Text
     fontSize={0}
-    {...props}
     css={{
       textTransform: 'uppercase',
       fontWeight: 100,
       letterSpacing: '0.1rem',
     }}
+    {...props}
   />
 )
 
@@ -82,7 +82,6 @@ const Badge = ({ children, ...otherProps }) =>
       ml={-3}
       mr={1}
       bg={'red'}
-      {...otherProps}
       css={{
         display: 'flex',
         alignItems: 'center',
@@ -91,6 +90,7 @@ const Badge = ({ children, ...otherProps }) =>
         border: '0.5rem solid red',
         borderRadius: '0.3rem',
       }}
+      {...otherProps}
     >
       <Text fontSize={0} fontWeight="bold" color={'white'}>
         {children}
@@ -147,7 +147,6 @@ const Input = ({ label, ...otherProps }) => (
       mt={2}
       fontSize={2}
       color={'textgrey'}
-      {...otherProps}
       css={{
         border: '0.1rem solid',
         borderRadius: '0.5rem',
@@ -156,6 +155,7 @@ const Input = ({ label, ...otherProps }) => (
           color: theme.colors.lightgrey,
         },
       }}
+      {...otherProps}
     />
   </Flex>
 )
