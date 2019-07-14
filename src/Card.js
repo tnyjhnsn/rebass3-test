@@ -30,20 +30,16 @@ const Card = ({ children, otherProps }) => (
   </BaseCard>
 )
 
+const StyledButton = styled(BaseButton)({
+  cursor: 'pointer',
+  '&:hover': {
+    transform: 'scale(1.03)',
+    opacity: 0.8,
+  },
+})
+
 const Button = props => (
-  <BaseButton
-    width={[1 / 4]}
-    mr={2}
-    my={1}
-    css={{
-      cursor: 'pointer',
-      '&:hover': {
-        transform: 'scale(1.03)',
-        opacity: 0.8,
-      },
-    }}
-    {...props}
-  />
+  <StyledButton width={[1 / 4]} mr={2} my={1} {...props} />
 )
 
 const Heart = styled(BaseHeart)({
@@ -64,38 +60,39 @@ const MessageSquare = styled(BaseMessageSquare)({
   },
 })
 
-const Caps = props => (
-  <Text
-    fontSize={0}
-    css={{
-      textTransform: 'uppercase',
-      fontWeight: 100,
-      letterSpacing: '0.1rem',
-    }}
-    {...props}
-  />
-)
+const StyledCaps = styled(Text)({
+  fontSize: theme.fontSizes[0],
+  textTransform: 'uppercase',
+  fontWeight: 100,
+  letterSpacing: '0.1rem',
+})
 
-const Badge = ({ children, ...otherProps }) =>
+// Can also use template literals as well
+// --------------------------------------
+// const StyledCaps = styled(Text)`
+//   font-size: ${props => props.theme.fontSizes[0]};
+//   text-transform: uppercase;
+//   font-weight: 100;
+//   letter-spacing: 0.1rem;
+// `
+const Caps = props => <StyledCaps {...props} />
+
+const StyledBadge = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  alignContent: 'center',
+  height: '1.5rem',
+  border: '0.2rem solid red',
+  borderRadius: '0.3rem',
+})
+
+const Badge = ({ children }) =>
   parseInt(children) !== 0 ? (
-    <Box
-      ml={-3}
-      mr={1}
-      bg={'red'}
-      css={{
-        display: 'flex',
-        alignItems: 'center',
-        alignContent: 'center',
-        height: '1rem',
-        border: '0.5rem solid red',
-        borderRadius: '0.3rem',
-      }}
-      {...otherProps}
-    >
+    <StyledBadge ml={-3} mr={1} bg={'red'}>
       <Text fontSize={0} fontWeight="bold" color={'white'}>
         {children}
       </Text>
-    </Box>
+    </StyledBadge>
   ) : (
     ''
   )
@@ -119,44 +116,35 @@ const CardHeader = ({ src, name, handle, badge }) => (
   </Flex>
 )
 
-const Divider = props => (
-  <Box
-    as="hr"
-    mx={2}
-    my={2}
-    bg={'lightgrey'}
-    css={{
-      border: 0,
-      height: '0.1rem',
-    }}
-  />
-)
-
+const Divider = styled.hr`
+  background-color: ${props => props.theme.colors.lightgrey};
+  margin: ${props => props.theme.space[2]};
+  border: 0;
+  height: 0.1rem;
+`
 const Label = ({ label }) => (
   <Text fontSize={0} color={'textgrey'}>
     {label}
   </Text>
 )
 
+const StyledInput = styled.input`
+  padding: ${props => props.theme.space[2]};
+  margin-top: ${props => props.theme.space[2]};
+  font-size: ${props => props.theme.fontSizes[2]};
+  color: ${props => props.theme.colors.textgrey};
+  border: 0.1rem solid;
+  border-radius: 0.5rem;
+  border-color: ${props => props.theme.colors.lightgrey};
+  ::placeholder: {
+    color: ${props => props.theme.colors.lightgrey};
+  }
+`
+
 const Input = ({ label, ...otherProps }) => (
   <Flex m={2} flexDirection="column">
     {label ? <Label label={label} /> : ''}
-    <Box
-      as="input"
-      p={2}
-      mt={2}
-      fontSize={2}
-      color={'textgrey'}
-      css={{
-        border: '0.1rem solid',
-        borderRadius: '0.5rem',
-        borderColor: theme.colors.lightgrey,
-        '::placeholder': {
-          color: theme.colors.lightgrey,
-        },
-      }}
-      {...otherProps}
-    />
+    <StyledInput {...otherProps} />
   </Flex>
 )
 
