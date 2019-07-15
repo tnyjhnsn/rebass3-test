@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import 'styled-components/macro'
+
 import {
   Box,
   Flex,
@@ -60,12 +62,19 @@ const MessageSquare = styled(BaseMessageSquare)({
   },
 })
 
-const StyledCaps = styled(Text)({
-  fontSize: theme.fontSizes[0],
-  textTransform: 'uppercase',
-  fontWeight: 100,
-  letterSpacing: '0.1rem',
-})
+// Can use the css prop if
+// import 'styled-components/macro'
+const Caps = props => (
+  <Text
+    {...props}
+    css={{
+      fontSize: theme.fontSizes[0],
+      textTransform: 'uppercase',
+      fontWeight: 100,
+      letterSpacing: '0.1rem',
+    }}
+  />
+)
 
 // Can also use template literals as well
 // --------------------------------------
@@ -75,7 +84,6 @@ const StyledCaps = styled(Text)({
 //   font-weight: 100;
 //   letter-spacing: 0.1rem;
 // `
-const Caps = props => <StyledCaps {...props} />
 
 const StyledBadge = styled(Box)({
   display: 'flex',
@@ -116,30 +124,40 @@ const CardHeader = ({ src, name, handle, badge }) => (
   </Flex>
 )
 
-const Divider = styled.hr`
-  background-color: ${props => props.theme.colors.lightgrey};
-  margin: ${props => props.theme.space[2]};
-  border: 0;
-  height: 0.1rem;
-`
+const Divider = styled('hr')({
+  backgroundColor: theme.colors.lightgrey,
+  margin: theme.space[2],
+  border: 0,
+  height: '0.1rem',
+})
+
+// Or as template literal using raw css notation
+// ---------------------------------------------
+// const Divider = styled.hr`
+//   background-color: ${props => props.theme.colors.lightgrey};
+//   margin: ${props => props.theme.space[2]};
+//   border: 0;
+//   height: 0.1rem;
+// `
+
 const Label = ({ label }) => (
   <Text fontSize={0} color={'textgrey'}>
     {label}
   </Text>
 )
 
-const StyledInput = styled.input`
-  padding: ${props => props.theme.space[2]};
-  margin-top: ${props => props.theme.space[2]};
-  font-size: ${props => props.theme.fontSizes[2]};
-  color: ${props => props.theme.colors.textgrey};
-  border: 0.1rem solid;
-  border-radius: 0.5rem;
-  border-color: ${props => props.theme.colors.lightgrey};
-  ::placeholder: {
-    color: ${props => props.theme.colors.lightgrey};
-  }
-`
+const StyledInput = styled('input')({
+  padding: theme.space[2],
+  marginTop: theme.space[2],
+  fontSize: theme.fontSizes[2],
+  color: theme.colors.textgrey,
+  border: '0.1rem solid',
+  borderRadius: '0.5rem',
+  borderColor: theme.colors.lightgrey,
+  '::placeholder': {
+    color: theme.colors.lightgrey,
+  },
+})
 
 const Input = ({ label, ...otherProps }) => (
   <Flex m={2} flexDirection="column">

@@ -1,4 +1,4 @@
-export const blue = '#1269D3'
+export const blue = '#1269d3'
 export const lightgrey = '#dbdbdb'
 export const darkgrey = '#999'
 export const textgrey = '#323232'
